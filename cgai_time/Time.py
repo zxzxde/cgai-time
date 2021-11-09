@@ -884,7 +884,8 @@ class TimeHandler(object):
             cliped_data_list = clip_list(date_list, 7)
 
             weeks.append(week_start)
-            weeks.extend(cliped_data_list)
+            if cliped_data_list!=[[]]:
+                weeks.extend(cliped_data_list)
             weeks.append(week_end)
         else:
             weeks = [week_start]
