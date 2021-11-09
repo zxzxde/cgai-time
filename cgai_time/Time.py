@@ -876,7 +876,7 @@ class TimeHandler(object):
         date_list = self.getDateList(start_date,end_date)
         week_start = self.getWeekDates(start_date)
         week_end = self.getWeekDates(end_date)
-        if len(date_list) > 7:
+        if week_start != week_end:
             conect_start_end = week_start+week_end
             for date in conect_start_end:
                 if date in date_list:
