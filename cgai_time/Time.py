@@ -576,6 +576,25 @@ class TimeHandler(object):
         else:
             return False
 
+    @cgai_time_args_strs
+    def monthAdd(self, date,count):
+        """
+        给定日期与月数差值，返回该月数过后的日期
+        :param year:
+        :param month:
+        :param day:
+        :param count:
+        :return:
+        """
+        year,month,day = self.strDate2TupleDate(date)
+        new_month = month + count
+        _y = (new_month - 1) // 12
+        lm = new_month % 12
+        lm = lm if lm != 0 else 12
+        new_date = (year + _y, lm, day)
+        new_date = self.tupleDate2StrDate(new_date)
+        return new_date
+
 
     def getMonthDayCount(self, int_year:int, int_month:int):
         """
