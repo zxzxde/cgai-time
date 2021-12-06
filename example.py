@@ -167,7 +167,15 @@ ct = TimeHandler()
 # #获取今日日期
 # today = ct.getToday()
 # print(today)  # 2021-07-19
-#
+
+# #获取昨日
+# yesterday = ct.getYesterday()
+# print(yesterday)
+
+# #获取明天
+# tomorrow = ct.getTomorrow()
+# print(tomorrow)
+
 # # 计算两日期之间的相差多少天数
 # start_date = '2021-05-15'
 # end_date = '2021-07-18'
@@ -419,7 +427,8 @@ ct = TimeHandler()
 # print(new_date) #2022-11-3
 # new_date = ct.monthAdd('2021-12-03',-11)
 # print(new_date) #2021-01-03
-
+# new_date = ct.monthSub('2021-12-03',11)
+# print(new_date)
 # 判定指定月份是否为31天
 # isMonth31 = ct.isMonth31(8)
 # isMonth31 = ct.isMonth31('8')

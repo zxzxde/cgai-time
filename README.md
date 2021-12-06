@@ -229,6 +229,16 @@ print(new_str_time)  # 2021-07-21 18:48:37
 today = ct.getToday()
 print(today)  # 2021-07-19
 ```
+##### 获取昨天日期
+```python
+yesterday = ct.getYesterday()
+print(yesterday)  # 2021-07-18
+```
+##### 获取明天日期
+```python
+tomorrow = ct.getTomorrow()
+print(tomorrow)  # 2021-07-20
+```
 
 ##### 计算两日期之间的相差多少天数 
 ```python

@@ -595,6 +595,24 @@ class TimeHandler(object):
         new_date = self.tupleDate2StrDate(new_date)
         return new_date
 
+    @cgai_time_args_strs
+    def monthSub(self, date,count):
+        """
+        给定日期与月数差值，返回该月数过后的日期
+        :param year:
+        :param month:
+        :param day:
+        :param count:
+        :return:
+        """
+        year,month,day = self.strDate2TupleDate(date)
+        new_month = month - count
+        _y = (new_month - 1) // 12
+        lm = new_month % 12
+        lm = lm if lm != 0 else 12
+        new_date = (year + _y, lm, day)
+        new_date = self.tupleDate2StrDate(new_date)
+        return new_date
 
     def getMonthDayCount(self, int_year:int, int_month:int):
         """
@@ -779,6 +797,22 @@ class TimeHandler(object):
         """
         today = time.strftime("%Y-%m-%d")
         return today
+
+    def getYesterday(self):
+        """
+        获取昨日日期
+        :return:
+        """
+        yesterday = self.dateSub(self.getToday(),1)
+        return yesterday
+
+    def getTomorrow(self):
+        """
+        获取明天日期
+        :return:
+        """
+        tomorrow = self.dateAdd(self.getToday(),1)
+        return tomorrow
 
     @cgai_time_args_strs
     def dateAdd(self,start_date,days):
