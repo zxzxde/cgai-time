@@ -120,7 +120,7 @@ print(hours)  # 20.566666666666666
 print(int_hours)  # 20
 ```
 
-**小时转分钟**
+##### 小时转分钟
 ```python
 hours = 0.241
 minutes = ct.h2m(hours)
@@ -228,6 +228,16 @@ print(new_str_time)  # 2021-07-21 18:48:37
 ```python
 today = ct.getToday()
 print(today)  # 2021-07-19
+```
+##### 获取昨天日期
+```python
+yesterday = ct.getYesterday()
+print(yesterday)  # 2021-07-18
+```
+##### 获取明天日期
+```python
+tomorrow = ct.getTomorrow()
+print(tomorrow)  # 2021-07-20
 ```
 
 ##### 计算两日期之间的相差多少天数 
@@ -512,6 +522,14 @@ print(weeks)
 
 
 #### 月操作
+
+##### 月份加减
+```python
+new_date = ct.monthAdd('2021-12-03',11)
+print(new_date) #2022-11-3
+new_date = ct.monthAdd('2021-12-03',-11)
+print(new_date) #2021-01-03
+```
 
 ##### 判定指定月份是否为31天 
 ```python
