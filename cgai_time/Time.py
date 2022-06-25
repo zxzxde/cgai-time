@@ -330,6 +330,102 @@ class TimeHandler(object):
         return day*24 if not getInt else int(day*24)
 
 
+    def h2ms(self,h:float):
+        """
+        小时转毫秒
+        """
+
+        return int(float(h)*3600*1000)
+
+    def ms2h(self,ms:int):
+        """
+        毫秒转小时
+        """
+        int_h = ms//(3600*1000)
+        left_ms = ms - self.h2ms(int_h) 
+
+        return int_h,left_ms
+
+    def ms2m(self,ms:int):
+        """
+        毫秒转分钟
+        """
+
+        int_m = ms//(60*1000)
+        left_ms = ms - self.m2ms(int_m)
+
+        return int_m,left_ms
+
+    def m2ms(self,m:int):
+        """
+        分钟转毫秒
+        """
+        return int(float(m)*60*1000)
+
+
+    def s2ms(self,s:int):
+        """
+        秒转毫秒
+        """
+    
+        return int(float(s)*1000)
+    
+    def ms2s(self,ms:int):
+        """
+        毫秒转秒
+        """
+        int_s = int(ms)//1000
+        left_ms = ms - self.s2ms(int_s)
+
+        return int_s,left_ms
+
+    def srt2ms(self,srt:str):
+        """
+        字幕转毫秒
+        srt: 字幕格式 "00:02:45,440"
+        """
+        hms,ms = srt.split(',')
+        h,m,s = hms.split(':')
+
+        all_ms = int(ms) + self.h2ms(h) + self.m2ms(m) + self.s2ms(s)
+
+        return all_ms
+
+
+    def ms2srt(self,ms:int):
+        """
+        毫秒转字幕格式
+        """
+        int_h,left_ms = self.ms2h(ms)
+        int_m,left_ms = self.ms2m(left_ms)
+        int_s,left_ms = self.ms2s(left_ms)
+
+        return f"{int_h:02d}:{int_m:02d}:{int_s:02d},{left_ms:03d}"
+
+
+    def srt_add(self,start_srt:str,ms:int):
+        """
+        字幕时间添加
+        start_srt : "00:02:45,440"
+        ms : 毫秒
+        """
+        srt_time = self.srt2ms(start_srt)
+        ms = srt_time + ms
+
+        return self.ms2srt(ms)
+
+
+    def srt_sub(self,start_srt,ms):
+        """
+        字幕时间相减
+        start_srt : "00:02:45,440"
+        ms : 毫秒
+        """
+        srt_time = self.srt2ms(start_srt)
+        ms = srt_time - ms
+
+        return self.ms2srt(ms)
+
 
 
     def getSeconds(self,d=0,h=0,m=0):
