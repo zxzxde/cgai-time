@@ -114,7 +114,14 @@ ct = TimeHandler()
 # print(hours)  #  22.176000000000002
 # print(int_hours)  # 22
 #
-#
+
+# # 字幕时间转毫秒，毫秒转字幕时间
+# start_srt_time = '00:02:42,950'
+# ms = 4600
+
+# print(ct.ms2srt(ms))
+# print(ct.srt2ms(start_srt_time))
+
 #
 # # # 输入天数，小时，分钟转成秒
 # seconds = ct.getSeconds(d=1,h=3,m=25)

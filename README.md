@@ -166,6 +166,43 @@ print(hours)  #  22.176000000000002
 print(int_hours)  # 22
 ```
 
+##### 小时转毫秒
+```python
+hours = 2.5
+int_h,left_ms = ct.h2ms(hours)
+```
+
+##### 毫秒转小时
+```python
+ms = 4600
+int_h,left_ms = ct.ms2h(ms)
+```
+
+
+##### 分钟转毫秒
+```python
+minutes = 1.5
+ms = ct.m2ms(minutes)
+```
+
+##### 毫秒转分钟
+```python
+ms = 4600
+int_m,left_ms = ct.ms2m(ms)
+```
+
+##### 秒转毫秒
+```python
+seconds = 2.5
+ms = ct.s2ms(seconds)
+```
+
+##### 毫秒转秒
+```python
+ms = 4600
+int_s,left_ms = ct.ms2s(ms)
+```
+
 ##### 输入天数，小时，分钟转成秒 
 ```python
 seconds = ct.getSeconds(d=1,h=3,m=25)
@@ -181,6 +218,20 @@ dhms = ct.DHMS(seconds)
 print(dhms) #{'day': 1, 'hour': 0, 'minute': 59, 'second': 59}
 ```
 
+
+##### 字幕时间转毫秒
+```python
+srt = '00:02:42,950'
+ms= ct.srt2ms(srt)
+print(ms)  # 162950
+```
+
+##### 毫秒转字幕时间
+```python
+ms = 4600
+srt= ct.ms2srt(ms)
+print(srt) # 00:00:04,600
+```
 
 
 #### 时间计算
@@ -218,6 +269,17 @@ new_str_time = ct.subTime(str_time,s=21)  # 减少21秒
 print(new_str_time)  # 2021-07-18 17:18:23
 new_str_time = ct.addTime(str_time,d=1,h=8,m=50,s=21) 
 print(new_str_time)  # 2021-07-21 18:48:37
+```
+
+##### 字幕时间增减毫秒
+```python
+start_srt_time = '00:02:42,950'
+ms = 4600
+end_srt_time = ct.srt_add(start_srt_time,ms)
+print(end_srt_time)  # 00:02:47,550
+
+end_srt_time = ct.srt_sub(start_srt_time,ms)
+print(end_srt_time)  #  00:02:38,350
 ```
 
 
