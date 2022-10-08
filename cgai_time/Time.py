@@ -379,6 +379,18 @@ class TimeHandler(object):
 
         return int_s,left_ms
 
+    def f2s(self,frame,fps,getInt=False):
+        """
+        帧数转秒
+        """
+        return frame/fps if not getInt else frame//fps
+
+    def s2f(self,second,fps):
+        """
+        秒转帧数
+        """
+        return second * fps
+
     def srt2ms(self,srt:str):
         """
         字幕转毫秒
@@ -427,6 +439,81 @@ class TimeHandler(object):
         return self.ms2srt(ms)
 
 
+    def tc2f(self,timecode,fps):
+        """
+        时间码转帧数
+        """
+        h,m,s,f = timecode.split(':')
+        alls = self.h2s(int(h)) + self.m2s(int(m)) + int(s)
+        frames = alls * fps + int(f)
+        return frames
+
+    def f2tc(self,frames,fps):
+        """
+        帧数转时间码
+        """
+        s = int(frames/fps)
+        left_f = frames - s*fps   # 剩余不足一秒的帧数
+        dhms = self.DHMS(s)
+        timecode = f'{dhms["hour"]:02d}:{dhms["minute"]:02d}:{dhms["second"]:02d}:{left_f:02d}'
+        return timecode
+
+    def tc_add_tc(self,start_timecode,timecode,fps):
+        """
+        时间码加时间码
+        """
+        start_frames = self.tc2f(start_timecode,fps)
+        frames = self.tc2f(timecode,fps)
+        all_frames = start_frames + frames
+        timecode = self.f2tc(all_frames,fps)
+        return timecode
+
+    def tc_sub_tc(self,start_timecode,timecode,fps):
+        """
+        时间码减时间码
+        """
+        start_frames = self.tc2f(start_timecode,fps)
+        frames = self.tc2f(timecode,fps)
+        all_frames = start_frames - frames
+        timecode = self.f2tc(all_frames,fps)
+        return timecode
+
+    def tc_add_f(self,start_timecode,frames,fps):
+        """
+        时间码加帧数
+        """
+        start_frames = self.tc2f(start_timecode,fps)
+        all_frames = start_frames + int(frames)
+        timecode = self.f2tc(all_frames,fps)
+        return timecode
+
+    def tc_sub_f(self,start_timecode,frames,fps):
+        """
+        时间码减帧数
+        """
+        start_frames = self.tc2f(start_timecode,fps)
+        all_frames = start_frames - int(frames)
+        timecode = self.f2tc(all_frames,fps)
+        return timecode
+
+
+    def tc_add_s(self,start_timecode,second,fps):
+        """
+        时间码加秒
+        """
+        start_frames = self.tc2f(start_timecode,fps)
+        all_frames = start_frames + second * fps
+        timecode = self.f2tc(all_frames,fps)
+        return timecode
+
+    def tc_sub_s(self,start_timecode,second,fps):
+        """
+        时间码减秒
+        """
+        start_frames = self.tc2f(start_timecode,fps)
+        all_frames = start_frames - second * fps
+        timecode = self.f2tc(all_frames,fps)
+        return timecode
 
     def getSeconds(self,d=0,h=0,m=0):
         """

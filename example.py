@@ -135,7 +135,41 @@ ct = TimeHandler()
 # dhms = ct.DHMS(seconds)
 # print(dhms) #{'day': 1, 'hour': 0, 'minute': 59, 'second': 59}
 #
-#
+
+# """ ***** 时间码计算 ***** """
+
+# # 将时间码转帧数
+# timecode = "00:00:25:02"
+# fps = 24
+# frames = ct.tc2f(timecode,fps)
+# print(frames) # 602
+
+# # 将帧数转时间码
+# frames = 603
+# fps = 24 
+# timecode = ct.f2tc(frames,fps)
+# print(timecode) # 00:00:25:03
+
+
+# # 时间码加减帧数
+# timecode = "00:00:25:02"
+# fps = 24 
+# delta_frame = 20 
+# print(ct.tc_add_f(timecode,delta_frame,fps)) # 00:00:25:22
+# print(ct.tc_sub_f(timecode,delta_frame,fps)) # 00:00:24:06
+
+
+# # 时间码加减时间码
+
+# timecode = "00:03:25:02"
+# delta_timecode = '00:00:45:15'
+# fps = 24
+# print(ct.tc_add_tc(timecode,delta_timecode,fps)) # 00:04:10:17
+# print(ct.tc_sub_tc(timecode,delta_timecode,fps)) # 00:02:39:11
+
+
+
+
 # """ ***** 时间计算 ***** """
 #
 # # 获取当前时间戳
