@@ -7,12 +7,12 @@ import time
 import datetime
 from functools import wraps
 
-
+# 将字符串日期转成整数的数组日期
 def cgai_time_args_tuple(fun):
     @wraps(fun)
     def new_func(*args):
         first_arg = args[0]
-        if isinstance(first_arg,TimeHandler):  #当是直接调用类函数时,首参数为self
+        if isinstance(first_arg,TimeHandler):  # 当是直接调用类函数时,首参数为self
             input_args = args if len(args) > 2 else [args[0]]
             if len(args) == 2:
                 s_args = args[1].split('-')
@@ -43,7 +43,7 @@ def cgai_time_args_int(fun):
         return fun(*input_args)
     return new_func
 
-
+# 将数组日期转成字符串日期
 def cgai_time_args_str(fun):
     """
     返回字符串格式
@@ -83,7 +83,7 @@ def cgai_time_args_str(fun):
 
     return new_func
 
-
+# 将输入的数组日期转成字符串格式,如果是字符串输入则不做处理
 def cgai_time_args_strs(fun):
     """
     返回字符串格式
@@ -190,6 +190,36 @@ class TimeHandler(object):
 
         t_list = [int2str(i) for i in tuple_date]
         return '-'.join(t_list)
+
+    def slashDate2StrDate(self,slash_date):
+        """
+        将斜杠/日期转成减号-日期
+        :param slash_date: 2023/3/6
+        :return: str   2023-03-06
+        """
+        s_date = slash_date
+        if '/' in slash_date:
+            year,month,day = slash_date.split('/')
+            imonth = int(month)
+            iday = int(day)
+            s_date = f'{year}-{imonth:02d}-{iday:02d}'
+
+        return s_date
+
+    def strDate2SlashDate(self,date):
+        """
+        将减号-日期转成斜杠/日期
+        :param date: 2023-03-06 
+        :return: str   2023/3/6
+        """
+        s_date = date
+        if '-' in date:
+            year,month,day = date.split('-')
+            imonth = int(month)
+            iday = int(day)
+            s_date = f'{year}/{imonth}/{iday}'
+
+        return s_date
 
 
     def strTime2TimeStamp(self,str_time:str):
@@ -737,6 +767,7 @@ class TimeHandler(object):
 
 
 
+
     """
 
         *******************************************
@@ -964,6 +995,33 @@ class TimeHandler(object):
         """
         return 366 if self.isLeapyear(year) else 365
 
+    def getYearWeeks(self,year):
+        """
+        获取某一年的所有周
+        :param year: 
+        :return: list
+        """
+        year_start_date = f'{year}-01-01'
+        year_end_date = f'{year}-12-31'
+        weeks = self.acrossWeeks(year_start_date,year_end_date)
+        return weeks
+
+    @cgai_time_args_strs
+    def getWeekNumberInYear(self,date):
+        """
+        获取该天在该年中所在第几周
+        """
+        week_num = None
+        year = date.split('-')[0] 
+        year_start_date = f'{year}-01-01'
+        year_end_date = f'{year}-12-31'
+        weeks = self.acrossWeeks(year_start_date,year_end_date)
+        for i in range(len(weeks)):
+            week = weeks[i]
+            if date in week:
+                week_num = i + 1
+                break
+        return week_num
 
     """
 

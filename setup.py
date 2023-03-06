@@ -7,7 +7,7 @@ with open(os.path.join(this_directory, 'README.md'), encoding='utf-8') as f:
 
 setuptools.setup(
     name="cgai_time",
-    version="0.0.7",
+    version="0.0.8",
     author="Master Zhang",
     author_email="360014296@qq.com",
     description="A date and time tool.",

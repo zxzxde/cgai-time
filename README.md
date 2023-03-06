@@ -57,6 +57,20 @@ str_time = ct.timeStamp2StrTime(time_stamp)
 print(str_time) # "2021-07-18 17:19:44"
 ```
 
+##### 将斜杠/日期转成减号-日期 
+```python
+slash_date = '2023/3/6'
+sdate = ct.slashDate2StrDate(slash_date)
+print(sdate)  # 2023-03-06
+```
+##### 将减号-日期转成斜杠/日期
+```python
+date = '2023-03-06'
+slash_date = ct.strDate2SlashDate(date)
+print(slash_date) # 2023/3/6
+```
+
+
 ##### 秒数转分钟 
 ```python
 seconds = 70
