@@ -20,11 +20,21 @@ ct = TimeHandler()
 # time_stamp = ct.strTime2TimeStamp(str_time)
 # print(time_stamp) # 1626599984.0
 #
-# #时间戳转格式化日期时间
+# # 时间戳转格式化日期时间
 # time_stamp = 1626599984.0
 # str_time = ct.timeStamp2StrTime(time_stamp)
 # print(str_time) # "2021-07-18 17:19:44"
-#
+
+# # 将斜杠/日期转成减号-日期
+# slash_date = '2023/3/6'
+# sdate = ct.slashDate2StrDate(slash_date)
+# print(sdate)  # 2023-03-06
+
+# 将减号-日期转成斜杠/日期
+# date = '2023-03-06'
+# slash_date = ct.strDate2SlashDate(date)
+# print(slash_date) # 2023/3/6
+
 #
 #
 # # 秒数转分钟
@@ -135,7 +145,55 @@ ct = TimeHandler()
 # dhms = ct.DHMS(seconds)
 # print(dhms) #{'day': 1, 'hour': 0, 'minute': 59, 'second': 59}
 #
-#
+
+# """ ***** 字幕时间计算 ***** """
+
+# # 字幕时间转毫秒
+# srt = "00:02:45,440"
+# ms = ct.srt2ms(srt)
+# print(ms)
+
+# # 毫秒转字幕时间
+# ms = 15351
+# srt = ct.ms2srt(ms)
+# print(srt)
+
+
+
+# """ ***** 时间码计算 ***** """
+
+# # 将时间码转帧数
+# timecode = "00:00:25:02"
+# fps = 24
+# frames = ct.tc2f(timecode,fps)
+# print(frames) # 602
+
+# # 将帧数转时间码
+# frames = 603
+# fps = 24 
+# timecode = ct.f2tc(frames,fps)
+# print(timecode) # 00:00:25:03
+
+
+# # 时间码加减帧数
+# timecode = "00:00:25:02"
+# fps = 24 
+# delta_frame = 20 
+# print(ct.tc_add_f(timecode,delta_frame,fps)) # 00:00:25:22
+# print(ct.tc_sub_f(timecode,delta_frame,fps)) # 00:00:24:06
+
+
+# # 时间码加减时间码
+
+# timecode = "00:03:25:02"
+# delta_timecode = '00:00:45:15'
+# fps = 24
+# print(ct.tc_add_tc(timecode,delta_timecode,fps)) # 00:04:10:17
+# print(ct.tc_sub_tc(timecode,delta_timecode,fps)) # 00:02:39:11
+
+
+
+
 # """ ***** 时间计算 ***** """
 #
 # # 获取当前时间戳
@@ -424,7 +482,10 @@ ct = TimeHandler()
 #  ['2021-07-05', '2021-07-06', '2021-07-07', '2021-07-08', '2021-07-09', '2021-07-10', '2021-07-11'],
 #  ['2021-07-12', '2021-07-13', '2021-07-14', '2021-07-15', '2021-07-16', '2021-07-17', '2021-07-18']]
 #
-
+# # 获取该天在该年中所在第几周
+# week_num = ct.getWeekNumberInYear((2023,3,6))  #
+# week_num = ct.getWeekNumberInYear('2023-03-06')
+# print(week_num)  # 11
 
 """ ***** 月 ***** """
 
@@ -500,5 +561,11 @@ ct = TimeHandler()
 # # 获取指定年份的天数
 # days = ct.getYearDays(2020)
 # print(days)  # 366
+
+# 获取某一年的所有周
+# weeks = ct.getYearWeeks(2023)
+# print(weeks[0],weeks[-1])
+
+
 
 
