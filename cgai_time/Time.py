@@ -958,6 +958,96 @@ class TimeHandler(object):
         else:
             return int_month + 1
 
+    """
+
+        *******************************************
+            季度计算
+        *******************************************
+
+    """
+    @cgai_time_args_str
+    def getQuarter(self,date):
+        """
+        获取指定日期所在季度信息
+        return: tuple     eg: 1,[1,2,3]
+        """
+        quarter_map = {1:[1,2,3],2:[4,5,6],3:[7,8,9],4:[10,11,12]}
+        month = int(date.split('-')[1])
+        index = qlist = None
+        for i,q in quarter_map.items():
+            if month in q:
+                index = i
+                qlist = q
+                break
+        return index,qlist
+
+    @cgai_time_args_str
+    def getQuarterStartDates(self,date):
+        """
+        获取指定日期所在的季度的各月起始日期
+        return: []  eg:['2023-01-01', '2023-02-01', '2023-03-01']
+        """
+        s_year,s_month,s_day = date.split('-')
+        year = int(s_year)
+        month = int(s_month)
+        index,qlist = self.getQuarter(date)
+        start_dates = []
+        for m in qlist:
+            start_date = f'{year}-{m:02d}-01'
+            start_dates.append(start_date)
+        return start_dates
+
+    def getCurrentQuarterStartDates(self):
+        """
+        获取本季度的各月第一天
+        return: []  eg:['2023-01-01', '2023-02-01', '2023-03-01']
+        """
+        today = self.getToday()
+        return self.getQuarterStartDates(today)
+
+    def getLastQuarterStartDates(self):
+        """
+        获取上季度的各月第一天
+        return: []  eg:['2023-01-01', '2023-02-01', '2023-03-01']
+        """
+        start,_,_ = self.getCurrentQuarterStartDates()
+        last_start = self.dateSub(start,1)
+        return self.getQuarterStartDates(last_start)
+
+    def getNextQuarterStartDates(self):
+        """
+        获取下季度的各月第一天
+        return: []  eg:['2023-01-01', '2023-02-01', '2023-03-01']
+        """
+        _,_,last = self.getCurrentQuarterStartDates()
+        next_start = self.monthAdd(last,1)
+        return self.getQuarterStartDates(next_start)
+
+    @cgai_time_args_strs
+    def quarterAdd(self,date,count):
+        """
+        季度相加
+        date:  具体日期
+        count: 相加的季度数
+        return:  []  eg:['2023-01-01', '2023-02-01', '2023-03-01']
+        """
+        start,_,end = self.getQuarterStartDates(date)
+        next_start = self.monthAdd(start,count*3)
+        return self.getQuarterStartDates(next_start)
+
+    @cgai_time_args_strs
+    def quarterSub(self,date,count):
+        """
+        季度相减
+        date:  具体日期
+        count: 相减的季度数
+        return:  []  eg:['2023-01-01', '2023-02-01', '2023-03-01']
+        """
+        start,_,end = self.getQuarterStartDates(date)
+        last_end = self.monthSub(end,count*3)
+        return self.getQuarterStartDates(last_end)
+
+
 
     """
 

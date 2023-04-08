@@ -666,6 +666,54 @@ print(month_weeks)
 
 ```
 
+#### 季度计算
+
+##### 获取指定天所在的季度信息
+```python
+date = '2023-03-23'
+quarter_number,quarter_list = ct.getQuarter(date)
+print(quarter_number,quarter_list)  # 1  [1,2,3]    表示是在第一季度,该季度有1,2,3个月
+
+```
+
+##### 获取指定天所在的季度的各月起始日期
+```python
+date = '2023-03-23'
+quarter_start_dates = ct.getQuarterStartDates(date)
+print(quarter_start_dates)  # ['2023-01-01', '2023-02-01', '2023-03-01']   
+```
+##### 获取本季度的各月起始日期
+```python
+quarter_start_dates = ct.getCurrentQuarterStartDates()
+print(quarter_start_dates)  # ['2023-01-01', '2023-02-01', '2023-03-01'] 
+```
+##### 获取上季度的各月起始日期
+```python
+quarter_start_dates = ct.getLastQuarterStartDates()
+print(quarter_start_dates)  # ['2022-10-01', '2022-11-01', '2022-12-01'] 
+```
+
+##### 获取下季度的各月起始日期
+```python
+quarter_start_dates = ct.getNextQuarterStartDates()
+print(quarter_start_dates)  # ['2023-04-01', '2023-05-01', '2023-06-01'] 
+```
+
+##### 基于指定天进行季度相加，返回季度的各月起始日期
+```python
+date = '2022-02-02'
+quarter_start_dates = ct.quarterAdd(date,3)   # 该天所在季度向后再加3个季度
+print(quarter_start_dates)  # ['2022-10-01', '2022-11-01', '2022-12-01']  
+```
+
+##### 基于指定天进行季度相减，返回季度的各月起始日期
+```python
+date = '2022-03-23'
+quarter_start_dates = ct.quarterSub(date,3)   # 该天所在季度向前再减3个季度
+print(quarter_start_dates)  # ['2021-04-01', '2021-05-01', '2021-06-01'] 
+```
+
+
 #### 年计算
 
 ##### 判定是否为闰年 
