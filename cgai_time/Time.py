@@ -5,6 +5,7 @@
 
 import time
 import datetime
+from dateutil.relativedelta import relativedelta
 from functools import wraps
 
 # 将字符串日期转成整数的数组日期
@@ -1274,6 +1275,42 @@ class TimeHandler(object):
         else:
             weeks = [week_start]
         return weeks
+
+
+    @cgai_time_args_strs
+    def getStartDateAcrossMonths(self,start_date=None, end_date=None):
+        """
+        获取指定日期范围内所有月份的第一天
+        
+        Args:
+            start_date: 起始日期，格式为'YYYY-MM-DD'
+            end_date: 结束日期，格式为'YYYY-MM-DD'
+        
+        Returns:
+            包含所有月份第一天的日期列表
+        """
+        # 将输入字符串转换为datetime对象
+        start = datetime.datetime.strptime(start_date, '%Y-%m-%d')
+        end = datetime.datetime.strptime(end_date, '%Y-%m-%d')
+        
+        # 获取开始月份的第一天
+        current = start.replace(day=1)
+        
+        # 获取结束月份的第一天
+        end = end.replace(day=1)
+        
+        result = []
+        
+        # 循环直到超过结束月份
+        while current <= end:
+            result.append(current.date().strftime('%Y-%m-%d'))
+            # 添加一个月
+            current += relativedelta(months=1)
+        
+        return result
+
+
+
 
     @cgai_time_args_strs
     def getDatesByNumber(self,start_date=None,end_date=None,number=0):
