@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
 __title__ = 'cgai_time'
-__version__ = '0.1.0'
+__version__ = '0.1.1'
 __author__ = 'Master Zhang'
 __author_email__ = '360014296@qq.com'
 __license__ = 'GPLv3'

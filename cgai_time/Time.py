@@ -231,6 +231,21 @@ class TimeHandler(object):
         """
         ts = time.mktime(time.strptime(str_time, "%Y-%m-%d %H:%M:%S"))
         return ts
+    
+    def strTime2UTC(self,str_time:str):
+        """
+        将字符串时间数据转成UTC格式
+        :param str_time:
+        :return:
+        """
+        splist = str_time.split(' ')
+        if len(splist) == 1: # 仅一个日期
+            utc = str_time + 'T00:00:00Z'
+        elif len(splist) == 2:  # 正常2个,带时间
+            utc = f'{splist[0]}T{splist[1]}Z'
+        return utc
+
+
 
     def timeStamp2StrTime(self, time_stamp: float):
         """

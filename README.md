@@ -49,6 +49,12 @@ str_time = '2021-07-18 17:19:44'
 time_stamp = ct.strTime2TimeStamp(str_time)
 print(time_stamp) # 1626599984.0
 ```
+##### 格式化日期转UTC格式 
+```python
+str_time = '2021-07-18 17:19:44'
+utc_time = ct.strTime2UTC(str_time)
+print(utc_time) # 2021-07-18T17:19:44Z
+```
 
 ##### 时间戳转格式化日期时间 
 ```python
